@@ -15,8 +15,8 @@ interface ChallengesContextData {
     startNewChallenge: () => void,
     activeChallenge: Challenge,
     resetChallenge: () => void,
-    experieceToNextLevel: number
-    completeChallenge: () => void
+    experieceToNextLevel: number,
+    completeChallenge: () => void,
 }
 
 interface ChallengesProviderProps {
