@@ -26,6 +26,7 @@ export default function Home(props) {
       <div className={styles.container}>
         <Head>
           <title>Início | move.it</title>
+          <script data-ad-client="ca-pub-1419288585381307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         </Head>
         <ExperienceBar />
         <CountdownProvider>
