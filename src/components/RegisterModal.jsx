@@ -4,14 +4,23 @@ import styles from '../styles/components/RegisterModal.module.css'
 
 export default function RegisterModal() {
   const [username,setUsername] = useState(null)
+
  const {setUser} = useContext(ChallengesContext)
 
   async function handleSetUser() {
-    const res = await fetch(`https://api.github.com/users/${username}`)
-    const {name} = await res.json()
-    setUser(name,username)
-  }
+    try {
+        const res = await fetch(`https://api.github.com/users/${username}`)
+        const {name} = await res.json()
 
+        if (name) {
+            setUser(name,username)
+        } else {
+            setUser(username,username)
+        }
+    } catch (error) {
+        setUser(username,username)
+    }
+  }
   return (
     <div className={styles.overlay}>
       <div className={styles.container}>
@@ -29,4 +38,5 @@ export default function RegisterModal() {
       </div>
     </div>
   )
-}
+
+  }
