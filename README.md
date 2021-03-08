@@ -4,7 +4,7 @@
 
 ## Intalar dependencias de desenvolvimento:
 
-    npm uninstall typescript @types/react @types/react-dom @types/node -D
+    npm install typescript @types/react @types/react-dom @types/node -D
 
 ## Rodar Dev Server
 
