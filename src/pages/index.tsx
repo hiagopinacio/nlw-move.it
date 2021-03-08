@@ -13,7 +13,8 @@ import { ChallengesProvider } from "../contexts/ChallengesContext";
 interface HomeProps {
   level: number,
   currentExperience: number,
-  challengesCompleted: number
+  challengesCompleted: number,
+  user: String
 }
 
 export default function Home(props) {
@@ -22,6 +23,8 @@ export default function Home(props) {
       level={props.level}
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
+      name={props.name}
+      username={props.username}
     >
       <div className={styles.container}>
         <Head>
@@ -48,10 +51,24 @@ export default function Home(props) {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
+  const { level, currentExperience, challengesCompleted, name, username } = ctx.req.cookies
+  if (name == undefined){
+    return {props: {
+      level: Number(level),
+      currentExperience: Number(currentExperience), 
+      challengesCompleted: Number(challengesCompleted), 
+      name: null, 
+      username: null
+    }
+  }
+  }
   return {
     props: {
-      level: Number(level), currentExperience: Number(currentExperience), challengesCompleted: Number(challengesCompleted)
+      level: Number(level),
+      currentExperience: Number(currentExperience), 
+      challengesCompleted: Number(challengesCompleted), 
+      name: String(name), 
+      username: String(username)
     }
   }
 }

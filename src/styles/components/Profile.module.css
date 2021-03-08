@@ -1,7 +1,15 @@
  .profileContainer {
      display: flex;
      align-items: center;
+     border-radius: 5px;
  }
+ .profileContainer:hover {
+    cursor: pointer;
+    
+    filter: brightness(0.9)
+}
+
+
 
  .profileContainer>img {
      width: 5.5rem;
