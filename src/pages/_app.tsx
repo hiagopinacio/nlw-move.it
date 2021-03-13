@@ -16,6 +16,44 @@ const [theme, setTheme] = useState( {
   }
 })
 
+
+  function changeTheme(dark) {   
+    if (dark) {
+      setTheme( {
+  
+        colors: {
+          background: '#111',
+          text: '#fff',
+          white: "#222",
+          title: "#ddd"
+        }
+      })
+    } else {
+      setTheme( {
+
+        colors: {
+          background: '#f2f3f5',
+          text: '#666',
+          white: "#fff",
+          title: "#2e384d"
+        }
+    })     
+    }
+  }
+
+  return (
+  <ThemeProvider theme={theme}>
+      <GlobalStyle theme={theme} />
+        <span>Dark Theme:  </span>
+      <ToggleSwitch >
+        <input type="checkbox" onChange={(event) =>changeTheme(event.target.checked)}/>
+        <span ></span>
+      </ToggleSwitch>
+      <Component {...pageProps} />
+  </ThemeProvider>
+  )
+}
+
 const GlobalStyle = createGlobalStyle`
 * {
   margin: 0;
@@ -24,12 +62,12 @@ const GlobalStyle = createGlobalStyle`
 }
 
 :root {
-  --white: ${theme.colors.white};
-  --background: ${theme.colors.background};
+  --white: ${props => props.theme.colors.white};
+  --background: ${props => props.theme.colors.background};
   --gray-line: #dcdde0;
-  --text:  ${theme.colors.text};
+  --text:  ${props =>props.theme.colors.text};
   --text-highlight: #b3b9ff;
-  --title: ${theme.colors.title};
+  --title: ${props =>props.theme.colors.title};
   --red: #e83f5b;
   --green: #4cd62b;
   --blue: #5965e0;
@@ -71,44 +109,6 @@ a {
   text-decoration: none;
 }
 `
-  function changeTheme(dark) {   
-    if (dark) {
-      setTheme( {
-  
-        colors: {
-          background: '#222',
-          text: '#fff',
-          white: "#555",
-          title: "#ddd"
-        }
-      })
-    } else {
-      setTheme( {
-
-        colors: {
-          background: '#f2f3f5',
-          text: '#666666',
-          white: "#fff",
-          title: "#2e384d"
-        }
-    })     
-    }
-  }
-
-  return (
-  <ThemeProvider theme={theme}>
-      <GlobalStyle />
-        <span>Dark Theme:  </span>
-      <ToggleSwitch >
-        <input type="checkbox" onChange={(event) =>changeTheme(event.target.checked)}/>
-        <span ></span>
-      </ToggleSwitch>
-      <Component {...pageProps} />
-  </ThemeProvider>
-  )
-}
-
-
 const ToggleSwitch = styled.label`
 position: relative;
   display: inline-block;

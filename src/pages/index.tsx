@@ -5,10 +5,11 @@ import { Profile } from "../components/Profile"
 
 import Head from "next/head";
 import { GetServerSideProps } from 'next'
-import styles from '../styles/pages/Home.module.css'
+import styled from 'styled-components'
 import { ChallengeBox } from "../components/ChallengeBox";
 import { CountdownProvider } from "../contexts/CountdownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
+import { useContext } from "react";
 
 interface HomeProps {
   level: number,
@@ -16,7 +17,6 @@ interface HomeProps {
   challengesCompleted: number,
   user: String
 }
-
 export default function Home(props) {
   return (
     <ChallengesProvider
@@ -26,7 +26,7 @@ export default function Home(props) {
       name={props.name}
       username={props.username}
     >
-      <div className={styles.container}>
+      <Wrapper>
         <Head>
           <title>Início | move.it</title>
           <script data-ad-client="ca-pub-1419288585381307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -44,7 +44,7 @@ export default function Home(props) {
             </div>
           </section>
         </CountdownProvider>
-      </div>
+      </Wrapper>
     </ChallengesProvider>
   )
 }
@@ -73,3 +73,20 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 }
 
+const Wrapper = styled.div`
+  height: 100vh;
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+
+  display: flex;
+  flex-direction: column;
+
+  section {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6.25rem;
+    align-content: center;
+  }
+`
